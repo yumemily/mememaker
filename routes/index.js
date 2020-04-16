@@ -16,14 +16,14 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/browse', (req, res) => {
   const data = loadData()
-  res.render('allImages', { images: data })
+  res.render('allimages', { images: data })
 })
 
 //Upload image
 router.post('/upload', upload.single('fileUpload'), async (req, res, next) => {
   const { file } = req
   if (!file) {
-    return res.render('allImages', { error: 'you need to upload a file' })
+    return res.render('allimages', { error: 'you need to upload a file' })
   };
   const data = loadData()
   const found = data.findIndex(el => el.originalname === file.originalname && el.size === file.size)
@@ -116,7 +116,7 @@ router.post('/addtext/:img', urlencodedParser, async (req, res, next) => {
   memeData.push({filename: fileName})
   saveMemesData(memeData)
 
-  res.render('allMemes', {images: memeData})
+  res.render('allmemes', {images: memeData})
 })
 
 router.get('/memes', (req, res) => {
