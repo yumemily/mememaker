@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}!</p>
+
+{{#if error}}
+<h1>{{error}}</h1>
+{{/if}}
+
+<form action="/upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="fileUpload" />
+  <button type='submit'>Upload</button>
+</form> 

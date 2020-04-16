@@ -1,0 +1,31 @@
+{{#if error}}
+<h1>{{error}}</h1>
+{{/if}}
+
+{{#if images}}
+
+{{#each images}}
+<div  class="card m-5" style="width: 18rem;">
+    <img class="card-img-top" src="/uploads/{{{filename}}}" alt={{{filename}}} alt="Card image cap">
+    <div class="card-body">
+        {{!-- <h5 class="card-title">Card title</h5> --}}
+        <form action='/addtext/{{{filename}}}' method='POST' enctype="application/x-www-form-urlencoded">
+            <div class="form-group">
+                <label for="formGroupExampleInput">Top Text</label>
+                <input name='topText' id='top' type="text" class="form-control" placeholder="Top Text">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Bottom Text</label>
+                <input name='bottomText' id='bottom' type="text" class="form-control" placeholder="Bottom Text">
+            </div>
+            {{{ path }}} 
+            <button type="submit" class="btn btn-primary">Create meme!</button>
+        </form>
+        
+    </div>
+</div>
+{{!-- <img src = "/uploads/{{{filename}}}" alt={{{filename}}}/> {{! this image is an object}} --}}
+
+{{/each}}
+
+{{/if}}
