@@ -58,7 +58,7 @@ router.post('/upload', upload.single('fileUpload'), async (req, res, next) => {
   }
 
   //Render allimages view template
-  res.render('allImages', { images: data })
+  res.render('allimages', { images: data })
 })
 
 //Create meme
