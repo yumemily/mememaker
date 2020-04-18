@@ -1,8 +1,16 @@
-<h1> Memes here!</h1>
 
+{{#if error}}
+<h1>{{error}}</h1>
+{{/if}}
+
+<div class='container'>
+<div class='heading'>Your Masterpieces</div>
+<div class='d-flex flex-row justify-content-center flex-wrap '>
 {{#if images}}
 {{#each images}}
-<img class="card-img-top" src="/memes/{{{filename}}}" alt={{{filename}}} alt="Card image cap">
+<img class='m-3' src="/memes/{{{filename}}}" alt={{{filename}}} >
 {{/each}}
 
 {{/if}}
+</div>
+</div>

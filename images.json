@@ -1,1 +1,46 @@
-[{"fieldname":"fileUpload","originalname":"kk.png","encoding":"7bit","mimetype":"image/png","destination":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads","filename":"kk.png","path":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads/kk.png","size":6407,"id":1},{"fieldname":"fileUpload","originalname":"villager-1.png","encoding":"7bit","mimetype":"image/png","destination":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads","filename":"villager-1.png","path":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads/villager-1.png","size":3201,"id":2},{"fieldname":"fileUpload","originalname":"villager-2.png","encoding":"7bit","mimetype":"image/png","destination":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads","filename":"villager-2.png","path":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads/villager-2.png","size":2968,"id":3},{"fieldname":"fileUpload","originalname":"moneybag.png","encoding":"7bit","mimetype":"image/png","destination":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads","filename":"moneybag.png","path":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads/moneybag.png","size":14131,"id":4},{"fieldname":"fileUpload","originalname":"house.jpg","encoding":"7bit","mimetype":"image/jpeg","destination":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads","filename":"house.jpg","path":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads/house.jpg","size":24740,"id":5},{"fieldname":"fileUpload","originalname":"tree.png","encoding":"7bit","mimetype":"image/png","destination":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads","filename":"tree.png","path":"/Users/emily/Desktop/high-sierra/newmeme/public/uploads/tree.png","size":6667,"id":6}]
+[
+    {
+        "fieldname": "fileUpload",
+        "originalname": "arthurmeme.jpeg",
+        "encoding": "7bit",
+        "mimetype": "image/jpeg",
+        "destination": "/Users/emily/Desktop/high-sierra/newmeme/public/uploads",
+        "filename": "arthurmeme.jpeg",
+        "path": "/Users/emily/Desktop/high-sierra/newmeme/public/uploads/arthurmeme.jpeg",
+        "size": 12239,
+        "id": 1
+    },
+    {
+        "fieldname": "fileUpload",
+        "originalname": "Screen_Shot_2019-06-26_at_1.32.02_PM.jpg",
+        "encoding": "7bit",
+        "mimetype": "image/jpeg",
+        "destination": "/Users/emily/Desktop/high-sierra/newmeme/public/uploads",
+        "filename": "Screen_Shot_2019-06-26_at_1.32.02_PM.jpg",
+        "path": "/Users/emily/Desktop/high-sierra/newmeme/public/uploads/Screen_Shot_2019-06-26_at_1.32.02_PM.jpg",
+        "size": 39717,
+        "id": 2
+    },
+    {
+        "fieldname": "fileUpload",
+        "originalname": "pikachumeme.jpg",
+        "encoding": "7bit",
+        "mimetype": "image/jpeg",
+        "destination": "/Users/emily/Desktop/high-sierra/newmeme/public/uploads",
+        "filename": "pikachumeme.jpg",
+        "path": "/Users/emily/Desktop/high-sierra/newmeme/public/uploads/pikachumeme.jpg",
+        "size": 43230,
+        "id": 3
+    },
+    {
+        "fieldname": "fileUpload",
+        "originalname": "futurememe.jpg",
+        "encoding": "7bit",
+        "mimetype": "image/jpeg",
+        "destination": "/Users/emily/Desktop/high-sierra/newmeme/public/uploads",
+        "filename": "futurememe.jpg",
+        "path": "/Users/emily/Desktop/high-sierra/newmeme/public/uploads/futurememe.jpg",
+        "size": 114794,
+        "id": 4
+    }
+]

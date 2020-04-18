@@ -6,8 +6,7 @@ const fs = require('fs')
 var bodyParser = require('body-parser')
 
 const path = require('path')
-const { loadData, saveData } = require('../utils/data')
-const { loadMemesData, saveMemesData } = require('../utils/memesdata')
+const { loadData, saveData, loadMemesData, saveMemesData } = require('../utils/data')
 
 var index = express();
 index.use(express.json());
@@ -47,7 +46,7 @@ router.post('/upload', upload.single('fileUpload'), async (req, res, next) => {
   //Resize Image
   try {
     let image = await Jimp.read(file.path)
-    image.resize(300, Jimp.AUTO, Jimp.RESIZE_BEZIER);
+    image.resize(Jimp.AUTO, 200, Jimp.RESIZE_BEZIER);
     await image.writeAsync(file.path) //wait until promise is resolved, promise is something that arrives
     file.id = data.length === 0 ? 1 : data[data.length - 1].id + 1
     data.push(file)
@@ -58,76 +57,90 @@ router.post('/upload', upload.single('fileUpload'), async (req, res, next) => {
     return res.render('index', { error: e.message })
   }
 
-  //Push image to the database
-  // image.id = data.length === 0 ? 1 : data[data.length - 1].id + 1
-  // data.push(image)
-  // saveData(data)
-
   //Render allimages view template
   res.render('allImages', { images: data })
 })
 
 //Create meme
-const pathToData = path.join(__dirname, '../public/uploads')
 const pathToMemes = path.join(__dirname, '../public/memes')
 
-router.post('/addtext/:img', urlencodedParser, async (req, res, next) => {
-  splitUrl = req.path.split('/')
-  fileName = splitUrl[2]
-  console.log('HELLO',req.body) //bodyparser to read body
+router.post('/addtext', urlencodedParser, async (req, res, next) => {
 
-  //Add text over image
-  console.log('create meme', req.path)
-  // await Jimp.loadFont(`${pathToData}/${fileName}`)
-  //   .then(font => {
-  //     image.print(
-  //       font,
-  //       x,
-  //       y,
-  //       {
-  //         text: 'Hello world!', //static for now
-  //         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
-  //         alignmentY: Jimp.VERTICAL_ALIGN_TOP
-  //       },
-  //       maxWidth,
-  //       maxHeight,
+  newFileName = Date.now()//unique, new file name
 
-  //     )
-  //   });
+  console.log('HELLO', req.body) //bodyparser needed to read body
 
-  var imageCaption = 'Image caption';
+  const {topText, bottomText, id} = req.body //client can only send body using post/put/patch
+  console.log('toptext',topText)
+
+  if(!id)
+  return res.redirect('/browse') //400 means something is missing in your request, res.direct doesn't allow you to use error
+  if( !topText && !bottomText)
+  return res.redirect('/browse')
+
+  //Create Meme
+
   var loadedImage;
 
-  await Jimp.read(`${pathToData}/${fileName}`)
+  // Use id to query the original image
+  const data = loadData();
+  const selectedImageIndex = data.findIndex(image => image.id*1 == id*1)
+  if(selectedImageIndex === -1){
+    return res.redirect('/browse')
+  }
+  const selectedImage = data[selectedImageIndex]
+  let imagePath = selectedImage.path
+
+  await Jimp.read(`${imagePath}`)
     .then(function (image) {
       loadedImage = image;
-      return Jimp.loadFont(Jimp.FONT_SANS_16_BLACK);
+      return Jimp.loadFont(Jimp.FONT_SANS_32_WHITE);
     })
     .then(function (font) {
-      loadedImage.print(font, 0, 0, req.body.topText, Jimp.HORIZONTAL_ALIGN_CENTER)
-      .write(`${pathToMemes}/${fileName}`);
+
+      var w = loadedImage.bitmap.width;
+      var h = loadedImage.bitmap.height;
+      
+      console.log('w,h', w, h)
+
+      loadedImage.print(
+        font, 0, 0,
+        {
+          text: req.body.topText,
+          alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+        }, w, h,
+      )
+      loadedImage.print(
+        font, 0, h - Jimp.measureTextHeight(font,req.body.topText),
+        {
+          text: req.body.bottomText,
+          alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+        }, w, h
+      )
+        .write(`${pathToMemes}/${newFileName}`);
     })
     .catch(function (err) {
       console.error(err);
     });
-  // Push image to the database
-
+  
+    // Push image to the database
   const memeData = loadMemesData();
-  memeData.push({filename: fileName})
+  memeData.push({ filename: newFileName })
   saveMemesData(memeData)
 
-  res.render('allmemes', {images: memeData})
+  res.render('allmemes', { images: memeData })
 })
 
 router.get('/memes', (req, res) => {
   const memeData = loadMemesData();
-  console.log('why',memeData)
+  console.log('why', memeData)
   res.render('allmemes', { images: memeData })
 })
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
+  const memeData = loadMemesData();
+  res.render('index', { title: 'Welcome to the Memerator', images: memeData });
 });
 
 module.exports = router;

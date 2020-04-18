@@ -1,11 +1,39 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}!</p>
 
-{{#if error}}
-<h1>{{error}}</h1>
-{{/if}}
+<div class='contain'>
 
-<form action="/upload" method="post" enctype="multipart/form-data">
-  <input type="file" name="fileUpload" />
-  <button type='submit'>Upload</button>
-</form> 
+  {{#if error}}
+  <h1>{{error}}</h1>
+  {{/if}}
+  
+  <div class="row mt-5">
+    <div id='sidebar' class="col-3 d-none d-sm-block">
+        <ul id='nav-items' class="list-group list-group-flush">
+          <li class="list-group-item nav-color" style='font-size:20px;'> Lorem ipsum</li>
+          <li class="list-group-item"><i class="fa fa-home nav-color" aria-hidden="true"></i> Item 1</li>
+          <li class="list-group-item"><i class="fa fa-file-image-o nav-color" aria-hidden="true"></i> Item 2</li>
+          <li class="list-group-item"><i class="fa fa-folder-open nav-color" aria-hidden="true"></i> Item 3</li>
+        </ul>
+    </div>
+
+    <div class="col-9">
+      <div class='uploadBox' class='flex-column'>
+        <h1>{{title}}!</h1>
+        <p>Upload your images and add text over them to create memes!</p>
+
+        <p class='small font-italic mt-5'>Note: only .gif .jpg. .jpeg .png files are supported</p>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+          <input type="file" name="fileUpload" />
+          <br><button id='uploadButton' class='mt-4' type='submit'><i class="fa fa-upload" aria-hidden="true"></i> Upload Meme!</button>
+        </form> 
+      </div>
+      <div class='headers'>Latest Memes</div>
+      
+      {{#if images}}
+      {{#each images}}
+      <img class="card-img-top my-3" src="/memes/{{{filename}}}" alt={{{filename}}} >
+      {{/each}}
+      {{/if}}
+    </div>
+  </div>
+
+</div>

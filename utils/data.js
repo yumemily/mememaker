@@ -15,4 +15,17 @@ function saveData(data){
     fs.writeFileSync(pathToData, JSON.stringify(data));
 }
 
-module.exports = {loadData, saveData}
+const pathToMemes = path.join(__dirname, '../memes.json')
+
+function loadMemesData(){
+    const buffer = fs.readFileSync(pathToMemes);
+    const data = buffer.toString();
+    console.log(data)
+    return JSON.parse(data)
+}
+
+function saveMemesData(data){
+    fs.writeFileSync(pathToMemes, JSON.stringify(data));
+}
+
+module.exports = {loadData, saveData, loadMemesData, saveMemesData}
